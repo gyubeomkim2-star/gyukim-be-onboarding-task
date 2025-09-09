@@ -1,39 +1,36 @@
-1) 개요
+# 1) 개요
 
 •	Auth/User/Follow: MySQL(JPA)
 •	Posts: MongoDB(문서형)
 •	Feed: Follow + Post 조합 조회
 •	Caching(옵션): 이후 Redis로 단건 조회 캐시(post:{id}) 도입 예정
 
-2) 아키텍처 (서비스 단)
+# 2) 아키텍처 (서비스 단)
 
    •	Client → API Gateway/LB → User / Follow / Post / Feed Service
    •	User/Follow → MySQL, Post → MongoDB
    •	(옵션) Redis는 서비스 ↔ DB 사이의 읽기 캐시 레이어로 배치
 
-3) 기술 스택
+# 3) 기술 스택
    •	Java 17, Spring Boot 3
    •	Spring Web, Spring Data JPA(MySQL), Spring Data MongoDB
    •	(옵션) Spring Cache (+ Redis)
    •	Testcontainers, JUnit 5, Docker / docker-compose
 
-4) 빠른 시작
+# 4) 의존 서비스
 
-의존 서비스
+MySQL, Mongo (옵션) 나중에 Redis
 
-# MySQL, Mongo 
+# 5) 빠른 실행
 
-# (옵션) 나중에 Redis
-
-# 기본 실행
 mvn spring-boot:run
 
-# OpenAPI (기본실행 이후)
+OpenAPI (run 이후)
 http://localhost:8080/swagger-ui/index.html
 
-5) APIs
+# 6) APIs
 
-5.1 Posts (Mongo)
+6.1 Posts (Mongo)
 
 POST   /posts                # body: {authorId, title, content, tags[]}
 GET    /posts/{id}
@@ -41,26 +38,26 @@ PUT    /posts/{id}           # body: {title?, content?, tags?}
 DELETE /posts/{id}
 GET    /posts?q=&tags=t1,t2&page=0&size=10
 
-5.2 Follow / Users (MySQL)
+6.2 Follow / Users (MySQL)
 
 POST /users/{userId}/follow
 DELETE /users/{userId}/follow
 
 GET /users/{userId}/followers
 
-5.3 Feed (조합)
+6.3 Feed (조합)
 
 GET  /feed?userId=&page=0&size=10
 
 
-6비기능 요구사항 (NFR)
+7) 비기능 요구사항 (NFR)
    •	Latency 목표: 단건 조회 p95 < 100ms, 피드 p95 < 200ms
    •	가용성: 토이 단계 단일 인스턴스 OK (후에 롤링 배포)
    •	일관성: MySQL(강한), Mongo/피드(최종)
    •	보안: JWT, BCrypt, Secret/환경변수 관리
    •	관측성: Actuator /health, /metrics, 요청 로그 traceId
 
-6) 간단 계산(DAU 10,000 기준)
+8) 간단 계산(DAU 10,000 기준)
 
 Functional Requirements
 - User (MySQL/JPA)
@@ -101,11 +98,11 @@ Total = ~3kb
 Daily: 3kb * 20000 ‎ = 60,000kB = 60 MB/day
 Yearly: 60MB * 365 ‎ = 21,900MB = 21.9GB
 
-7) High-Level Architecture
+9) High-Level Architecture
 
 ![스크린샷 2025-09-08 오후 2.48.59.png](../../Library/Group%20Containers/group.com.apple.notes/Accounts/LocalAccount/Media/1AE823F0-ADF5-4465-B7DE-36C39FE5E57A/1_3EFE4CEB-6BFB-4CE2-B607-AF23588F8021/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-09-08%20%EC%98%A4%ED%9B%84%202.48.59.png)
 
-8) 테스트
+10) 테스트
     •	단위/통합 테스트: JUnit5 + Testcontainers(MySQL, Mongo)
     •	예: PostService 통합 테스트 → MongoContainer, User 존재 체크용 MySQLContainer
 
