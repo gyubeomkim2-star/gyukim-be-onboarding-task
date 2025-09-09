@@ -11,7 +11,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  build:
+  build-and-publish-jacoco-report:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,10 +26,6 @@ jobs:
       - name: Build and Test with Maven
         run: mvn -B package --file pom.xml
 
-  coverage:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Publish Jacoco Report to PR
         uses: madrapps/jacoco-report@v1.7.2
         with:
