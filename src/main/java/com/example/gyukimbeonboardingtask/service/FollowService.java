@@ -42,7 +42,7 @@ public class FollowService {
         followRepository.deleteByFollowerIdAndFollowingId(followerId, followeeId);
     }
 
-    public List<Long> getFollowerIdsByFollowingId(Long userId) {
-        return followRepository.getFollowerIdsByFollowingId(userId);
+    public List<Long> getFollowerIdsByFollowingId(Long followingId) {
+        return followRepository.getFollowerIdsByFollowingId(followingId);
     }
 }
