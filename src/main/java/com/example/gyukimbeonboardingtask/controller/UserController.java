@@ -2,14 +2,16 @@ package com.example.gyukimbeonboardingtask.controller;
 
 import com.example.gyukimbeonboardingtask.domain.User;
 import com.example.gyukimbeonboardingtask.repository.UserRepository;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v0/users")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserRepository userRepository;
