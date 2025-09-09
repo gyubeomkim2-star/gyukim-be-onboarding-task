@@ -29,6 +29,7 @@ jobs:
   coverage:
     needs: build
     runs-on: ubuntu-latest
+    steps:
       - name: Publish Jacoco Report to PR
         uses: madrapps/jacoco-report@v1.7.2
         with:
