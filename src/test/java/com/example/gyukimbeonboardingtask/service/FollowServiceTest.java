@@ -63,4 +63,16 @@ class FollowServiceTest {
         verify(followRepository, never()).existsByFollowerIdAndFollowingId(any(), any());
         verify(followRepository, never()).save(any(Follow.class));
     }
+
+    @Test
+    void unfollow_success() {
+        Long followerId = 1L;
+        Long followeeId = 2L;
+
+        when(followRepository.existsByFollowerIdAndFollowingId(followerId, followeeId)).thenReturn(true);
+
+        followService.unfollowUser(followerId, followeeId);
+
+        verify(followRepository).deleteByFollowerIdAndFollowingId(followerId, followeeId);
+    }
 }
