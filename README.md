@@ -58,7 +58,7 @@ http://localhost:8080/swagger-ui/index.html
   - Highly available
   - Consistency for user follow
   - Eventual Consistency for the latest post retrieval
-  - Highly scalable - mySQL (read replicas) / NoSQL (sharing)
+  - Highly scalable - mySQL (read replicas) / NoSQL (sharding)
 
 # 8) 간단 계산(DAU 10,000 기준)
 
