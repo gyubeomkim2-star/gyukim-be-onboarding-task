@@ -1,9 +1,9 @@
 # 1) 개요
 
-•	Auth/User/Follow: MySQL(JPA)
-•	Posts: MongoDB(문서형)
-•	Feed: Follow + Post 조합 조회
-•	Caching(옵션): 이후 Redis로 단건 조회 캐시(post:{id}) 도입 예정
+- Auth/User/Follow: MySQL(JPA)
+- Posts: MongoDB(문서형)
+- Feed: Follow + Post 조합 조회
+- Caching(옵션): 이후 Redis로 단건 조회 캐시(post:{id}) 도입 예정
 
 # 2) 아키텍처 (서비스 단)
 
