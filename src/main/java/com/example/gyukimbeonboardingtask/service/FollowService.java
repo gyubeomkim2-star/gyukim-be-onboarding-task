@@ -3,7 +3,10 @@ package com.example.gyukimbeonboardingtask.service;
 import com.example.gyukimbeonboardingtask.domain.Follow;
 import com.example.gyukimbeonboardingtask.repository.FollowRepository;
 import jakarta.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -17,6 +20,9 @@ public class FollowService {
 
     @Transactional
     public void followUser(Long followerId, Long followeeId) {
+        if (followerId.equals(followeeId)) {
+            throw new IllegalArgumentException("본인은 팔로우 할 수 없습니다.");
+        }
         if (followRepository.existsByFollowerIdAndFollowingId(followerId, followeeId)) {
             throw new IllegalArgumentException("이미 팔로우한 사용자입니다.");
         }
@@ -34,5 +40,9 @@ public class FollowService {
         }
 
         followRepository.deleteByFollowerIdAndFollowingId(followerId, followeeId);
+    }
+
+    public List<Long> getFollowerIdsByFollowingId(Long followingId) {
+        return followRepository.getFollowerIdsByFollowingId(followingId);
     }
 }
