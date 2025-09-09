@@ -19,7 +19,7 @@ MySQL, Mongo (옵션) 나중에 Redis
 
 mvn spring-boot:run
 
-OpenAPI (run 이후)
+Swagger 실행 (run 이후)
 http://localhost:8080/swagger-ui/index.html
 
 # 5) APIs
