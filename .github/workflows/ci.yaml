@@ -26,28 +26,13 @@ jobs:
       - name: Build and Test with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Upload JaCoCo Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: jacoco-report
-          path: target/site/jacoco/jacoco.xml
-
   coverage:
     needs: build
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Download JaCoCo Report
-        uses: actions/download-artifact@v3
-        with:
-          name: jacoco-report
-          path: target/site/jacoco/
-
       - name: Publish Jacoco Report to PR
         uses: madrapps/jacoco-report@v1.7.2
         with:
-          paths: target/site/jacoco/jacoco.xml
+          paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 60
           min-coverage-changed-files: 80
