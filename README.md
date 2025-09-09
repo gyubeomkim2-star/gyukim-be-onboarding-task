@@ -30,7 +30,7 @@ http://localhost:8080/swagger-ui/index.html
 
 # 6) APIs
 
-6.1 Posts (Mongo)
+## 6.1 Posts (Mongo)
 
 POST   /posts                # body: {authorId, title, content, tags[]}
 GET    /posts/{id}
@@ -38,26 +38,26 @@ PUT    /posts/{id}           # body: {title?, content?, tags?}
 DELETE /posts/{id}
 GET    /posts?q=&tags=t1,t2&page=0&size=10
 
-6.2 Follow / Users (MySQL)
+## 6.2 Follow / Users (MySQL)
 
 POST /users/{userId}/follow
 DELETE /users/{userId}/follow
 
 GET /users/{userId}/followers
 
-6.3 Feed (조합)
+## 6.3 Feed (조합)
 
 GET  /feed?userId=&page=0&size=10
 
 
-7) 비기능 요구사항 (NFR)
+# 7) 비기능 요구사항 (NFR)
    •	Latency 목표: 단건 조회 p95 < 100ms, 피드 p95 < 200ms
    •	가용성: 토이 단계 단일 인스턴스 OK (후에 롤링 배포)
    •	일관성: MySQL(강한), Mongo/피드(최종)
    •	보안: JWT, BCrypt, Secret/환경변수 관리
    •	관측성: Actuator /health, /metrics, 요청 로그 traceId
 
-8) 간단 계산(DAU 10,000 기준)
+# 8) 간단 계산(DAU 10,000 기준)
 
 Functional Requirements
 - User (MySQL/JPA)
@@ -98,11 +98,11 @@ Total = ~3kb
 Daily: 3kb * 20000 ‎ = 60,000kB = 60 MB/day
 Yearly: 60MB * 365 ‎ = 21,900MB = 21.9GB
 
-9) High-Level Architecture
+# 9) High-Level Architecture
 
 <img width="806" height="541" alt="스크린샷 2025-09-08 오후 2 48 59" src="https://github.com/user-attachments/assets/12894444-50f3-4974-8112-53007c79d592" />
 
-10) 테스트
+# 10) 테스트
     •	단위/통합 테스트: JUnit5 + Testcontainers(MySQL, Mongo)
     •	예: PostService 통합 테스트 → MongoContainer, User 존재 체크용 MySQLContainer
 
