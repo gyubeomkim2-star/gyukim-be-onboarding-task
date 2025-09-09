@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class FollowRequestTest {
+public class FollowRequestTest {
 
     @Test
-    void testFollowerIdGetterAndSetter() {
+    public void testFollowerIdGetterAndSetter() {
         FollowRequest request = new FollowRequest();
         Long followerId = 1L;
 
