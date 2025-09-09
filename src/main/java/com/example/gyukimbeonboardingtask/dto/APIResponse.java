@@ -13,8 +13,8 @@ public class APIResponse<T> {
 
     private String code;
     private String message;
-    private T data; // 제네릭 타입으로 어떤 데이터든 담을 수 있게 함
-
+    private T data;
+    
     public static <T> APIResponse<T> success() {
         return new APIResponse<>("200", "SUCCESS", null);
     }
