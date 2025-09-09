@@ -1,7 +1,5 @@
-# 워크플로우의 이름
-name: Java CI with Maven
+name: Feed System CI with Maven
 
-# 워크플로우가 실행될 조건
 on:
   push:
     branches: [ "main" ]
