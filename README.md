@@ -5,32 +5,26 @@
 - Feed: Follow + Post 조합 조회
 - Caching(옵션): 이후 Redis로 단건 조회 캐시(post:{id}) 도입 예정
 
-# 2) 아키텍처 (서비스 단)
-
-   -	Client → API Gateway/LB → User / Follow / Post / Feed Service
-   -	User/Follow → MySQL, Post → MongoDB
-   -	(옵션) Redis는 서비스 ↔ DB 사이의 읽기 캐시 레이어로 배치
-
-# 3) 기술 스택
+# 2) 기술 스택
    - Java 17, Spring Boot 3
    - Spring Web, Spring Data JPA(MySQL), Spring Data MongoDB
    - (옵션) Spring Cache (+ Redis)
    - JUnit 5
 
-# 4) 의존 서비스
+# 3) 의존 서비스
 
 MySQL, Mongo (옵션) 나중에 Redis
 
-# 5) 빠른 실행
+# 4) 빠른 실행
 
 mvn spring-boot:run
 
 OpenAPI (run 이후)
 http://localhost:8080/swagger-ui/index.html
 
-# 6) APIs
+# 5) APIs
 
-## 6.1 Posts (Mongo)
+## 5.1 Posts (Mongo)
 
 - POST   /posts                # body: {authorId, title, content, tags[]}
 - GET    /posts/{id}
@@ -38,19 +32,19 @@ http://localhost:8080/swagger-ui/index.html
 - DELETE /posts/{id}
 - GET    /posts?q=&tags=t1,t2&page=0&size=10
 
-## 6.2 Follow / Users (MySQL)
+## 5.2 Follow / Users (MySQL)
 
 - POST /users/{userId}/follow
 - DELETE /users/{userId}/follow
 
 - GET /users/{userId}/followers
 
-## 6.3 Feed (조합)
+## 5.3 Feed (조합)
 
 - GET  /feed?userId=&page=0&size=10
 
 
-# 7) Functional Requirements
+# 6) Functional Requirements
 - User (MySQL/JPA)
 - Follow/Unfollow(MySQL/JPA)
 - Post CURD
@@ -58,7 +52,7 @@ http://localhost:8080/swagger-ui/index.html
 - Tag or Title based search
 - Cursor or pagination
 
-# 8) Non-Functional Requirements
+# 7) Non-Functional Requirements
 
   - Latency < 200ms
   - Highly available
@@ -66,7 +60,7 @@ http://localhost:8080/swagger-ui/index.html
   - Eventual Consistency - for the latest post retrieval
   - Highly scalable - mySQL (read replicas) / NoSQL (sharing)
 
-# 9) 간단 계산(DAU 10,000 기준)
+# 8) 간단 계산(DAU 10,000 기준)
 
 If a person does 30 requests
 If Read 8 : Write 2
@@ -88,11 +82,11 @@ Total = ~3kb
 Daily: 3kb * 20000 ‎ = 60,000kB = 60 MB/day
 Yearly: 60MB * 365 ‎ = 21,900MB = 21.9GB
 
-# 10) High-Level Architecture
+# 9) High-Level Architecture
 
 <img width="806" height="541" alt="스크린샷 2025-09-08 오후 2 48 59" src="https://github.com/user-attachments/assets/12894444-50f3-4974-8112-53007c79d592" />
 
-# 11) 테스트
+# 10) 테스트
     •	단위/통합 테스트: JUnit5 + Testcontainers(MySQL, Mongo)
     •	예: PostService 통합 테스트 → MongoContainer, User 존재 체크용 MySQLContainer
 
