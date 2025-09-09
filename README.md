@@ -17,7 +17,7 @@ MySQL, Mongo (옵션) 나중에 Redis
 
 # 4) 빠른 실행
 
-mvn spring-boot:run
+./mvnw clean install  
 
 Swagger 실행 (run 이후)
 http://localhost:8080/swagger-ui/index.html
