@@ -50,16 +50,7 @@ GET /users/{userId}/followers
 GET  /feed?userId=&page=0&size=10
 
 
-# 7) 비기능 요구사항 (NFR)
-   •	Latency 목표: 단건 조회 p95 < 100ms, 피드 p95 < 200ms
-   •	가용성: 토이 단계 단일 인스턴스 OK (후에 롤링 배포)
-   •	일관성: MySQL(강한), Mongo/피드(최종)
-   •	보안: JWT, BCrypt, Secret/환경변수 관리
-   •	관측성: Actuator /health, /metrics, 요청 로그 traceId
-
-# 8) Requirements
-
-Functional Requirements
+# 7) Functional Requirements
 - User (MySQL/JPA)
 - Follow/Unfollow(MySQL/JPA)
 - Post CURD
@@ -67,13 +58,13 @@ Functional Requirements
 - Tag or Title based search
 - Cursor or pagination
 
-Non-Functional Requirements
+# 8) Non-Functional Requirements
 
-Latency < 200ms
-Highly available
-Consistency  - for user follow
-Eventual Consistency - for the latest post retrieval
-Highly scalable - mySQL (read replicas) / NoSQL (sharing)
+  - Latency < 200ms
+  - Highly available
+  - Consistency  - for user follow
+  - Eventual Consistency - for the latest post retrieval
+  - Highly scalable - mySQL (read replicas) / NoSQL (sharing)
 
 # 9) 간단 계산(DAU 10,000 기준)
 
