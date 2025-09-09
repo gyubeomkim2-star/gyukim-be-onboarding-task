@@ -129,6 +129,10 @@
                                 <format>XML</format>
                                 <format>HTML</format>
                             </formats>
+                            <excludes>
+                                <exclude>com/example/gyukimbeonboardingtask/SwaggerConfig.class</exclude>
+                                <exclude>com/example/gyukimbeonboardingtask/GyukimBeOnboardingTaskApplication.class</exclude>
+                            </excludes>
                         </configuration>
                     </execution>
                 </executions>

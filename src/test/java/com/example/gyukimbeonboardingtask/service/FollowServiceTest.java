@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -27,7 +28,7 @@ public class FollowServiceTest {
     }
 
     @Test
-    public void follow_success() {
+    public void testFollowSuccess() {
         Long followerId = 1L;
         Long followeeId = 2L;
 
@@ -39,7 +40,7 @@ public class FollowServiceTest {
     }
 
     @Test
-    public void follow_when_already_followed_then_throw_exception() {
+    public void testFollowWhenAlreadyFollowedThenThrowException() {
         Long followerId = 1L;
         Long followeeId = 2L;
 
@@ -53,7 +54,7 @@ public class FollowServiceTest {
     }
 
     @Test
-    public void follow_when_same_user_then_throw_exception() {
+    public void testFollowWhenSameUserThenThrowException() {
         Long userId = 1L;
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -65,7 +66,7 @@ public class FollowServiceTest {
     }
 
     @Test
-    public void unfollow_success() {
+    public void TestUnfollowSuccess() {
         Long followerId = 1L;
         Long followeeId = 2L;
 
@@ -88,5 +89,19 @@ public class FollowServiceTest {
         });
 
         verify(followRepository, never()).deleteByFollowerIdAndFollowingId(any(), any());
+    }
+
+    @Test
+    public void getFollowerIdsByFollowingId_success() {
+        Long followingId = 1L;
+        when(followRepository.getFollowerIdsByFollowingId(followingId)).thenReturn(List.of(1L, 2L, 3L));
+        List<Long> followerIds = followService.getFollowerIdsByFollowingId(followingId);
+
+        assert followerIds.size() == 3;
+        assert followerIds.contains(1L);
+        assert followerIds.contains(2L);
+        assert followerIds.contains(3L);
+
+        verify(followRepository).getFollowerIdsByFollowingId(followingId);
     }
 }
