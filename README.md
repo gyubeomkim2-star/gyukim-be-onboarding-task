@@ -56,31 +56,30 @@ http://localhost:8080/swagger-ui/index.html
 
   - Latency < 200ms
   - Highly available
-  - Consistency  - for user follow
-  - Eventual Consistency - for the latest post retrieval
+  - Consistency for user follow
+  - Eventual Consistency for the latest post retrieval
   - Highly scalable - mySQL (read replicas) / NoSQL (sharing)
 
 # 8) 간단 계산(DAU 10,000 기준)
 
-If a person does 30 requests
-If Read 8 : Write 2
+- If a person does 30 requests (Read 8 : Write 2)
 
-Daily: 30 * 10000 ‎ = 300,000 req/day
-Avg: 300000 / 86400 ‎ = 3.472 RPS
-Peak time (* 10) = 34.72 RPS
+  - Daily: 30 * 10000 ‎ = 300,000 req/day
+  - Avg: 300000 / 86400 ‎ = 3.472 RPS
+  - Peak time (* 10) = 34.72 RPS
 
-If 1/3 create post (write)
-Daily: 20000
-Avg: 20000 / 86400 ‎ = 0.231 RPS
-Peak time (*10) = 2.31
+- If 1/3 create post (write)
+  - Daily: 20000
+  - Avg: 20000 / 86400 ‎ = 0.231 RPS
+  - Peak time (*10) = 2.31
 
-Title = ~1kb
-Post Desc =  ~2kb
-Tag = ~few mb
-Total = ~3kb
-
-Daily: 3kb * 20000 ‎ = 60,000kB = 60 MB/day
-Yearly: 60MB * 365 ‎ = 21,900MB = 21.9GB
+- Data Model
+ - Title = ~1kb
+ - Post Desc =  ~2kb
+ - Tag = ~few mb
+ - Total = ~3kb
+   - Daily: 3kb * 20000 ‎ = 60,000kB = 60 MB/day
+   - Yearly: 60MB * 365 ‎ = 21,900MB = 21.9GB
 
 # 9) High-Level Architecture
 
