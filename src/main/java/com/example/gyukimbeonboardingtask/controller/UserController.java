@@ -1,7 +1,7 @@
 package com.example.gyukimbeonboardingtask.controller;
 
-import com.example.gyukimbeonboardingtask.domain.User;
-import com.example.gyukimbeonboardingtask.repository.UserRepository;
+import com.example.gyukimbeonboardingtask.domain.mysql.User;
+import com.example.gyukimbeonboardingtask.repository.mysql.UserRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

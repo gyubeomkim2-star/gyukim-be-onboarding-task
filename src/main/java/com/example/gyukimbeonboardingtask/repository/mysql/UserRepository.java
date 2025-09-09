@@ -1,6 +1,6 @@
-package com.example.gyukimbeonboardingtask.repository;
+package com.example.gyukimbeonboardingtask.repository.mysql;
 
-import com.example.gyukimbeonboardingtask.domain.User;
+import com.example.gyukimbeonboardingtask.domain.mysql.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
