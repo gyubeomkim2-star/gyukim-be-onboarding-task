@@ -12,10 +12,10 @@
    •	(옵션) Redis는 서비스 ↔ DB 사이의 읽기 캐시 레이어로 배치
 
 # 3) 기술 스택
-   •	Java 17, Spring Boot 3
-   •	Spring Web, Spring Data JPA(MySQL), Spring Data MongoDB
-   •	(옵션) Spring Cache (+ Redis)
-   •	Testcontainers, JUnit 5, Docker / docker-compose
+   - Java 17, Spring Boot 3
+   - Spring Web, Spring Data JPA(MySQL), Spring Data MongoDB
+   - (옵션) Spring Cache (+ Redis)
+   - JUnit 5
 
 # 4) 의존 서비스
 
@@ -32,22 +32,22 @@ http://localhost:8080/swagger-ui/index.html
 
 ## 6.1 Posts (Mongo)
 
-POST   /posts                # body: {authorId, title, content, tags[]}
-GET    /posts/{id}
-PUT    /posts/{id}           # body: {title?, content?, tags?}
-DELETE /posts/{id}
-GET    /posts?q=&tags=t1,t2&page=0&size=10
+- POST   /posts                # body: {authorId, title, content, tags[]}
+- GET    /posts/{id}
+- PUT    /posts/{id}           # body: {title?, content?, tags?}
+- DELETE /posts/{id}
+- GET    /posts?q=&tags=t1,t2&page=0&size=10
 
 ## 6.2 Follow / Users (MySQL)
 
-POST /users/{userId}/follow
-DELETE /users/{userId}/follow
+- POST /users/{userId}/follow
+- DELETE /users/{userId}/follow
 
-GET /users/{userId}/followers
+- GET /users/{userId}/followers
 
 ## 6.3 Feed (조합)
 
-GET  /feed?userId=&page=0&size=10
+- GET  /feed?userId=&page=0&size=10
 
 
 # 7) Functional Requirements
