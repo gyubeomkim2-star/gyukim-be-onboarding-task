@@ -68,17 +68,17 @@ http://localhost:8080/swagger-ui/index.html
   - Peak time (* 10) = 34.72 RPS
 
 - If 1/3 create post (write)
-  - Daily: 20000
-  - Avg: 20000 / 86400 ‎ = 0.231 RPS
-  - Peak time (*10) = 2.31
+  - Daily: 60000
+  - Avg: 60000 / 86400 ‎ = 0.694 RPS
+  - Peak time (*10) = 6.94
 
 - Data Model
    - Title = ~1kb
    - Post Desc =  ~2kb
    - Tag = ~few mb
    - Total = ~3kb
-   - Daily: 3kb * 20000 ‎ = 60,000kB = 60 MB/day
-   - Yearly: 60MB * 365 ‎ = 21,900MB = 21.9GB
+   - Daily: 3kb * 60000 ‎ = 180000kB = 180 MB/day
+   - Yearly: 180MB * 365 ‎ = 65700MB = 65.7GB
 
 # 9) High-Level Architecture
 
