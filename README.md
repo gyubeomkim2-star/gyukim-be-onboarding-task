@@ -57,7 +57,7 @@ GET  /feed?userId=&page=0&size=10
    •	보안: JWT, BCrypt, Secret/환경변수 관리
    •	관측성: Actuator /health, /metrics, 요청 로그 traceId
 
-# 8) 간단 계산(DAU 10,000 기준)
+# 8) Requirements
 
 Functional Requirements
 - User (MySQL/JPA)
@@ -75,8 +75,7 @@ Consistency  - for user follow
 Eventual Consistency - for the latest post retrieval
 Highly scalable - mySQL (read replicas) / NoSQL (sharing)
 
-Calculation
-DAU 10000
+# 9) 간단 계산(DAU 10,000 기준)
 
 If a person does 30 requests
 If Read 8 : Write 2
@@ -98,11 +97,11 @@ Total = ~3kb
 Daily: 3kb * 20000 ‎ = 60,000kB = 60 MB/day
 Yearly: 60MB * 365 ‎ = 21,900MB = 21.9GB
 
-# 9) High-Level Architecture
+# 10) High-Level Architecture
 
 <img width="806" height="541" alt="스크린샷 2025-09-08 오후 2 48 59" src="https://github.com/user-attachments/assets/12894444-50f3-4974-8112-53007c79d592" />
 
-# 10) 테스트
+# 11) 테스트
     •	단위/통합 테스트: JUnit5 + Testcontainers(MySQL, Mongo)
     •	예: PostService 통합 테스트 → MongoContainer, User 존재 체크용 MySQLContainer
 
