@@ -100,7 +100,7 @@ Yearly: 60MB * 365 ‎ = 21,900MB = 21.9GB
 
 9) High-Level Architecture
 
-![스크린샷 2025-09-08 오후 2.48.59.png](../../Library/Group%20Containers/group.com.apple.notes/Accounts/LocalAccount/Media/1AE823F0-ADF5-4465-B7DE-36C39FE5E57A/1_3EFE4CEB-6BFB-4CE2-B607-AF23588F8021/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-09-08%20%EC%98%A4%ED%9B%84%202.48.59.png)
+<img width="806" height="541" alt="스크린샷 2025-09-08 오후 2 48 59" src="https://github.com/user-attachments/assets/12894444-50f3-4974-8112-53007c79d592" />
 
 10) 테스트
     •	단위/통합 테스트: JUnit5 + Testcontainers(MySQL, Mongo)
