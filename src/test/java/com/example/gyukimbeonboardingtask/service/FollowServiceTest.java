@@ -14,20 +14,20 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.never;
 
-class FollowServiceTest {
+public class FollowServiceTest {
     @Mock
     private FollowRepository followRepository;
 
     private FollowService followService;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         followService = new FollowService(followRepository);
     }
 
     @Test
-    void follow_success() {
+    public void follow_success() {
         Long followerId = 1L;
         Long followeeId = 2L;
 
@@ -39,7 +39,7 @@ class FollowServiceTest {
     }
 
     @Test
-    void follow_when_already_followed_then_throw_exception() {
+    public void follow_when_already_followed_then_throw_exception() {
         Long followerId = 1L;
         Long followeeId = 2L;
 
@@ -53,7 +53,7 @@ class FollowServiceTest {
     }
 
     @Test
-    void follow_when_same_user_then_throw_exception() {
+    public void follow_when_same_user_then_throw_exception() {
         Long userId = 1L;
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -65,7 +65,7 @@ class FollowServiceTest {
     }
 
     @Test
-    void unfollow_success() {
+    public void unfollow_success() {
         Long followerId = 1L;
         Long followeeId = 2L;
 
@@ -74,5 +74,19 @@ class FollowServiceTest {
         followService.unfollowUser(followerId, followeeId);
 
         verify(followRepository).deleteByFollowerIdAndFollowingId(followerId, followeeId);
+    }
+
+    @Test
+    public void unfollow_when_not_followed_then_throw_exception() {
+        Long followerId = 1L;
+        Long followeeId = 2L;
+
+        when(followRepository.existsByFollowerIdAndFollowingId(followerId, followeeId)).thenReturn(false);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            followService.unfollowUser(followerId, followeeId);
+        });
+
+        verify(followRepository, never()).deleteByFollowerIdAndFollowingId(any(), any());
     }
 }
