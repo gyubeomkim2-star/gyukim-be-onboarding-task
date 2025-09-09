@@ -7,9 +7,9 @@
 
 # 2) 아키텍처 (서비스 단)
 
-   •	Client → API Gateway/LB → User / Follow / Post / Feed Service
-   •	User/Follow → MySQL, Post → MongoDB
-   •	(옵션) Redis는 서비스 ↔ DB 사이의 읽기 캐시 레이어로 배치
+   -	Client → API Gateway/LB → User / Follow / Post / Feed Service
+   -	User/Follow → MySQL, Post → MongoDB
+   -	(옵션) Redis는 서비스 ↔ DB 사이의 읽기 캐시 레이어로 배치
 
 # 3) 기술 스택
    - Java 17, Spring Boot 3
