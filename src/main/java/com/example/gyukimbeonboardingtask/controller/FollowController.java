@@ -1,53 +1,32 @@
 package com.example.gyukimbeonboardingtask.controller;
 
-import com.example.gyukimbeonboardingtask.domain.Follow;
+import com.example.gyukimbeonboardingtask.dto.APIResponse;
 import com.example.gyukimbeonboardingtask.dto.FollowRequest;
-import com.example.gyukimbeonboardingtask.repository.FollowRepository;
-import jakarta.transaction.Transactional;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.ResponseEntity;
+import com.example.gyukimbeonboardingtask.service.FollowService; // FollowService import 추가
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v0/users")
+@RequestMapping("/api/users")
 public class FollowController {
 
-    private final FollowRepository followRepository;
+    private final FollowService followService;
 
-    public FollowController(FollowRepository followRepository) {
-        this.followRepository = followRepository;
+    public FollowController(FollowService followService) {
+        this.followService = followService;
     }
 
     @PostMapping("/{followingId}/follow")
-    @Transactional
-    public String followUser(@PathVariable Long followingId, @RequestBody FollowRequest request) {
+    public ResponseEntity<APIResponse<Void>> followUser(@PathVariable Long followingId, @RequestBody FollowRequest request) {
         Long followerId = request.getFollowerId();
-
-        if (followRepository.existsByFollowerIdAndFollowingId(followerId, followingId)) {
-            return "이미 팔로우한 사용자입니다.";
-        }
-
-        Follow follow = new Follow();
-        follow.setFollowerId(followerId);
-        follow.setFollowingId(followingId);
-        followRepository.save(follow);
-
-        return "팔로우 성공!";
+        followService.followUser(followerId, followingId);
+        return ResponseEntity.ok(APIResponse.success());
     }
 
     @DeleteMapping("/{followingId}/follow")
-    @Transactional
-    public String unfollowUser(@PathVariable Long followingId, @RequestBody FollowRequest request) {
+    public ResponseEntity<APIResponse<Void>>  unfollowUser(@PathVariable Long followingId, @RequestBody FollowRequest request) {
         Long followerId = request.getFollowerId();
-
-        if (!followRepository.existsByFollowerIdAndFollowingId(followerId, followingId)) {
-            return "팔로우하지 않은 사용자입니다.";
-        }
-
-        followRepository.deleteByFollowerIdAndFollowingId(followerId, followingId);
-        return "언팔로우 성공!";
+        followService.unfollowUser(followerId, followingId);
+        return ResponseEntity.ok(APIResponse.success());
     }
 }
