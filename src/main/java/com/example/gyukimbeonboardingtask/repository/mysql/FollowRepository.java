@@ -1,8 +1,8 @@
-package com.example.gyukimbeonboardingtask.repository;
+package com.example.gyukimbeonboardingtask.repository.mysql;
 
 import java.util.List;
-import com.example.gyukimbeonboardingtask.domain.Follow;
-import com.example.gyukimbeonboardingtask.domain.FollowId;
+import com.example.gyukimbeonboardingtask.domain.mysql.Follow;
+import com.example.gyukimbeonboardingtask.domain.mysql.FollowId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

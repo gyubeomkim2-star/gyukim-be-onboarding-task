@@ -1,4 +1,4 @@
-package com.example.gyukimbeonboardingtask.domain;
+package com.example.gyukimbeonboardingtask.domain.mysql;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

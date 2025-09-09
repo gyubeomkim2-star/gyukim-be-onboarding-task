@@ -1,7 +1,7 @@
 package com.example.gyukimbeonboardingtask.service;
 
-import com.example.gyukimbeonboardingtask.domain.Follow;
-import com.example.gyukimbeonboardingtask.repository.FollowRepository;
+import com.example.gyukimbeonboardingtask.domain.mysql.Follow;
+import com.example.gyukimbeonboardingtask.repository.mysql.FollowRepository;
 import jakarta.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -19,27 +19,27 @@ public class FollowService {
     }
 
     @Transactional
-    public void followUser(Long followerId, Long followeeId) {
-        if (followerId.equals(followeeId)) {
+    public void followUser(Long followerId, Long followingId) {
+        if (followerId.equals(followingId)) {
             throw new IllegalArgumentException("본인은 팔로우 할 수 없습니다.");
         }
-        if (followRepository.existsByFollowerIdAndFollowingId(followerId, followeeId)) {
+        if (followRepository.existsByFollowerIdAndFollowingId(followerId, followingId)) {
             throw new IllegalArgumentException("이미 팔로우한 사용자입니다.");
         }
 
         Follow follow = new Follow();
         follow.setFollowerId(followerId);
-        follow.setFollowingId(followeeId);
+        follow.setFollowingId(followingId);
         followRepository.save(follow);
     }
 
     @Transactional
-    public void unfollowUser(Long followerId, Long followeeId) {
-        if (!followRepository.existsByFollowerIdAndFollowingId(followerId, followeeId)) {
+    public void unfollowUser(Long followerId, Long followingId) {
+        if (!followRepository.existsByFollowerIdAndFollowingId(followerId, followingId)) {
             throw new IllegalArgumentException("팔로우하지 않은 사용자입니다.");
         }
 
-        followRepository.deleteByFollowerIdAndFollowingId(followerId, followeeId);
+        followRepository.deleteByFollowerIdAndFollowingId(followerId, followingId);
     }
 
     public List<Long> getFollowerIdsByFollowingId(Long followingId) {

@@ -1,7 +1,7 @@
 package com.example.gyukimbeonboardingtask.service;
 
-import com.example.gyukimbeonboardingtask.domain.Follow;
-import com.example.gyukimbeonboardingtask.repository.FollowRepository;
+import com.example.gyukimbeonboardingtask.domain.mysql.Follow;
+import com.example.gyukimbeonboardingtask.repository.mysql.FollowRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -29,11 +29,11 @@ class FollowServiceTest {
     @Test
     void follow_success() {
         Long followerId = 1L;
-        Long followeeId = 2L;
+        Long followingId = 2L;
 
-        when(followRepository.existsByFollowerIdAndFollowingId(followerId, followeeId)).thenReturn(false);
+        when(followRepository.existsByFollowerIdAndFollowingId(followerId, followingId)).thenReturn(false);
 
-        followService.followUser(followerId, followeeId);
+        followService.followUser(followerId, followingId);
 
         verify(followRepository).save(any(Follow.class));
     }
@@ -41,12 +41,12 @@ class FollowServiceTest {
     @Test
     void follow_when_already_followed_then_throw_exception() {
         Long followerId = 1L;
-        Long followeeId = 2L;
+        Long followingId = 2L;
 
-        when(followRepository.existsByFollowerIdAndFollowingId(followerId, followeeId)).thenReturn(true);
+        when(followRepository.existsByFollowerIdAndFollowingId(followerId, followingId)).thenReturn(true);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            followService.followUser(followerId, followeeId);
+            followService.followUser(followerId, followingId);
         });
 
         verify(followRepository, never()).save(any(Follow.class));
@@ -67,12 +67,12 @@ class FollowServiceTest {
     @Test
     void unfollow_success() {
         Long followerId = 1L;
-        Long followeeId = 2L;
+        Long followingId = 2L;
 
-        when(followRepository.existsByFollowerIdAndFollowingId(followerId, followeeId)).thenReturn(true);
+        when(followRepository.existsByFollowerIdAndFollowingId(followerId, followingId)).thenReturn(true);
 
-        followService.unfollowUser(followerId, followeeId);
+        followService.unfollowUser(followerId, followingId);
 
-        verify(followRepository).deleteByFollowerIdAndFollowingId(followerId, followeeId);
+        verify(followRepository).deleteByFollowerIdAndFollowingId(followerId, followingId);
     }
 }
