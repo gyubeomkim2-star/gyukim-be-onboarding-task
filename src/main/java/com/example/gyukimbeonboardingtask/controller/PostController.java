@@ -21,12 +21,12 @@ public class PostController {
         return ResponseEntity.ok(createdPost);
     }
 
-    @GetMapping("/{id}")
+    /**@GetMapping("/{id}")
     public ResponseEntity<Post> getPostById(@PathVariable String id) {
         return postService.getPostById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
-    }
+    }**/
 
     @GetMapping("/{authorId}")
     public ResponseEntity<List<Post>> getPostsByAuthorId(@PathVariable String authorId) {

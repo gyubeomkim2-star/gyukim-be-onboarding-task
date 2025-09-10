@@ -36,6 +36,6 @@ public class PostService {
             postRepository.deleteById(id);
             return true; // successful deletion
         }
-        return false; // fail to dele
+        return false; // fail to delete
     }
 }

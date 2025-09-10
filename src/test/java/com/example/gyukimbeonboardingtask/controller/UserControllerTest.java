@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
-import com.example.gyukimbeonboardingtask.domain.User;
-import com.example.gyukimbeonboardingtask.repository.UserRepository;
+import com.example.gyukimbeonboardingtask.domain.mysql.User;
+import com.example.gyukimbeonboardingtask.repository.mysql.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

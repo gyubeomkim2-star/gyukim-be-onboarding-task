@@ -137,6 +137,7 @@
                             </formats>
                             <excludes>
                                 <exclude>com/example/gyukimbeonboardingtask/SwaggerConfig.class</exclude>
+                                <exclude>com/example/gyukimbeonboardingtask/config/*</exclude>
                                 <exclude>com/example/gyukimbeonboardingtask/GyukimBeOnboardingTaskApplication.class</exclude>
                             </excludes>
                         </configuration>
