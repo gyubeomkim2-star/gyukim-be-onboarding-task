@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.5</version>
+        <version>3.3.1</version>
         <relativePath/>
     </parent>
     <groupId>com.example</groupId>
@@ -137,6 +137,7 @@
                             </formats>
                             <excludes>
                                 <exclude>com/example/gyukimbeonboardingtask/SwaggerConfig.class</exclude>
+                                <exclude>com/example/gyukimbeonboardingtask/config/*</exclude>
                                 <exclude>com/example/gyukimbeonboardingtask/GyukimBeOnboardingTaskApplication.class</exclude>
                             </excludes>
                         </configuration>
