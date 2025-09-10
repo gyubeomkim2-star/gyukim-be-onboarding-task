@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +30,9 @@ public class PostServiceTest {
     @Mock
     private PostRepository postRepository;
 
+    @Mock
+    private MongoTemplate mongoTemplate;
+
     private PostService postService;
 
     private Post samplePost;
@@ -36,7 +40,7 @@ public class PostServiceTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        postService = new PostService(postRepository);
+        postService = new PostService(postRepository, mongoTemplate);
 
         samplePost = new Post();
         samplePost.setId("1");

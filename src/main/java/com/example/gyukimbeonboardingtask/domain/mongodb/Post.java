@@ -16,4 +16,6 @@ public class Post {
     private String content;
     private String imageUrl;
     private List<String> tags;
+
+    private List<String> likes;
 }
