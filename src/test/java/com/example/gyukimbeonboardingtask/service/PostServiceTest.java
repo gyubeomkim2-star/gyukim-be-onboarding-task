@@ -5,12 +5,12 @@ import com.example.gyukimbeonboardingtask.repository.mongodb.PostRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +23,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.eq;
 
 @ExtendWith(MockitoExtension.class)
 public class PostServiceTest {
@@ -46,6 +47,7 @@ public class PostServiceTest {
         samplePost.setId("1");
         samplePost.setAuthorId("author1");
         samplePost.setContent("Test content");
+        samplePost.setLikes(new ArrayList<>());
     }
 
     @Test
@@ -120,5 +122,45 @@ public class PostServiceTest {
 
         assertFalse(result);
         verify(postRepository, never()).deleteById(any());
+    }
+
+    @Test
+    public void testAddLikeWhenPostExistsShouldReturnTrue() {
+        when(mongoTemplate.findAndModify(any(), any(), any(Class.class))).thenReturn(samplePost);
+
+        boolean result = postService.addLike("1", "user1");
+
+        assertTrue(result);
+        verify(mongoTemplate).findAndModify(any(), any(), eq(Post.class));
+    }
+
+    @Test
+    public void testAddLikeWhenPostDoesNotExistShouldReturnFalse() {
+        when(mongoTemplate.findAndModify(any(), any(), any(Class.class))).thenReturn(null);
+
+        boolean result = postService.addLike("999", "user1");
+
+        assertFalse(result);
+        verify(mongoTemplate).findAndModify(any(), any(), eq(Post.class));
+    }
+
+    @Test
+    public void testRemoveLikeWhenPostExistsShouldReturnTrue() {
+        when(mongoTemplate.findAndModify(any(), any(), any(Class.class))).thenReturn(samplePost);
+
+        boolean result = postService.removeLike("1", "user1");
+
+        assertTrue(result);
+        verify(mongoTemplate).findAndModify(any(), any(), eq(Post.class));
+    }
+
+    @Test
+    public void testRemoveLikeWhenPostDoesNotExistShouldReturnFalse() {
+        when(mongoTemplate.findAndModify(any(), any(), any(Class.class))).thenReturn(null);
+
+        boolean result = postService.removeLike("999", "user1");
+
+        assertFalse(result);
+        verify(mongoTemplate).findAndModify(any(), any(), eq(Post.class));
     }
 }

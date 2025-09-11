@@ -12,10 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @ExtendWith(MockitoExtension.class)
 public class PostControllerTest {
@@ -63,7 +65,7 @@ public class PostControllerTest {
         ResponseEntity<List<Post>> response = postController.getPostsByAuthorId(authorId);
 
         verify(postService).getPostsByAuthorId(authorId);
-        assertEquals(404, response.getStatusCodeValue());
+        assertEquals(404, response.getStatusCode().value());
     }
 
     @Test
@@ -74,7 +76,7 @@ public class PostControllerTest {
         ResponseEntity<Void> response = postController.deletePost(postId);
 
         verify(postService).deletePost(postId);
-        assertEquals(204, response.getStatusCodeValue());
+        assertEquals(204, response.getStatusCode().value());
     }
 
     @Test
@@ -85,7 +87,7 @@ public class PostControllerTest {
         ResponseEntity<Void> response = postController.deletePost(postId);
 
         verify(postService).deletePost(postId);
-        assertEquals(404, response.getStatusCodeValue());
+        assertEquals(404, response.getStatusCode().value());
     }
 
     @Test
@@ -98,5 +100,105 @@ public class PostControllerTest {
         verify(postService).getAllPosts();
         assertNotNull(response.getBody());
         assertEquals(expectedPosts, response.getBody());
+    }
+
+    @Test
+    public void testAddLikeToPostShouldReturnOkWhenSuccessful() {
+        String postId = "1";
+        Map<String, String> payload = Map.of("userId", "user1");
+        when(postService.addLike(postId, "user1")).thenReturn(true);
+
+        ResponseEntity<Void> response = postController.addLikeToPost(postId, payload);
+
+        verify(postService).addLike(postId, "user1");
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testAddLikeToPostShouldReturnBadRequestWhenUserIdMissing() {
+        String postId = "1";
+        Map<String, String> payload = Map.of();
+
+        ResponseEntity<Void> response = postController.addLikeToPost(postId, payload);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+    @Test
+    public void testAddLikeToPostShouldReturnNotFoundWhenPostNotExists() {
+        String postId = "1";
+        Map<String, String> payload = Map.of("userId", "user1");
+        when(postService.addLike(postId, "user1")).thenReturn(false);
+        when(postService.getPostById(postId)).thenReturn(java.util.Optional.empty());
+
+        ResponseEntity<Void> response = postController.addLikeToPost(postId, payload);
+
+        verify(postService).addLike(postId, "user1");
+        verify(postService).getPostById(postId);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testAddLikeToPostShouldReturnConflictWhenAlreadyLiked() {
+        String postId = "1";
+        Map<String, String> payload = Map.of("userId", "user1");
+        when(postService.addLike(postId, "user1")).thenReturn(false);
+        when(postService.getPostById(postId)).thenReturn(java.util.Optional.of(new Post()));
+
+        ResponseEntity<Void> response = postController.addLikeToPost(postId, payload);
+
+        verify(postService).addLike(postId, "user1");
+        verify(postService).getPostById(postId);
+        assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+    }
+
+    @Test
+    public void testRemoveLikeFromPostShouldReturnNoContentWhenSuccessful() {
+        String postId = "1";
+        Map<String, String> payload = Map.of("userId", "user1");
+        when(postService.removeLike(postId, "user1")).thenReturn(true);
+
+        ResponseEntity<Void> response = postController.removeLikeFromPost(postId, payload);
+
+        verify(postService).removeLike(postId, "user1");
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void testRemoveLikeFromPostShouldReturnBadRequestWhenUserIdMissing() {
+        String postId = "1";
+        Map<String, String> payload = Map.of();
+
+        ResponseEntity<Void> response = postController.removeLikeFromPost(postId, payload);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+    @Test
+    public void testRemoveLikeFromPostShouldReturnNotFoundWhenPostNotExists() {
+        String postId = "1";
+        Map<String, String> payload = Map.of("userId", "user1");
+        when(postService.removeLike(postId, "user1")).thenReturn(false);
+        when(postService.getPostById(postId)).thenReturn(java.util.Optional.empty());
+
+        ResponseEntity<Void> response = postController.removeLikeFromPost(postId, payload);
+
+        verify(postService).removeLike(postId, "user1");
+        verify(postService).getPostById(postId);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testRemoveLikeFromPostShouldReturnNotModifiedWhenNotLiked() {
+        String postId = "1";
+        Map<String, String> payload = Map.of("userId", "user1");
+        when(postService.removeLike(postId, "user1")).thenReturn(false);
+        when(postService.getPostById(postId)).thenReturn(java.util.Optional.of(new Post()));
+
+        ResponseEntity<Void> response = postController.removeLikeFromPost(postId, payload);
+
+        verify(postService).removeLike(postId, "user1");
+        verify(postService).getPostById(postId);
+        assertEquals(HttpStatus.NOT_MODIFIED, response.getStatusCode());
     }
 }

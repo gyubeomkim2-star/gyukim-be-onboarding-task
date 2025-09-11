@@ -31,4 +31,33 @@ public class APIResponseTest {
         assertEquals(errorMessage, response.getMessage());
         assertNull(response.getData());
     }
+
+    @Test
+    public void testSetCode() {
+        APIResponse<Object> response = new APIResponse<>();
+        response.setCode("500");
+        assertEquals("500", response.getCode());
+    }
+
+    @Test
+    public void testSetMessage() {
+        APIResponse<Object> response = new APIResponse<>();
+        response.setMessage("Test Message");
+        assertEquals("Test Message", response.getMessage());
+    }
+
+    @Test
+    public void testSetData() {
+        APIResponse<String> response = new APIResponse<>();
+        response.setData("Test Data");
+        assertEquals("Test Data", response.getData());
+    }
+
+    @Test
+    public void testDefaultConstructor() {
+        APIResponse<Object> response = new APIResponse<>();
+        assertNull(response.getCode());
+        assertNull(response.getMessage());
+        assertNull(response.getData());
+    }
 }
