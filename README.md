@@ -22,6 +22,11 @@ MySQL, Mongo (옵션) 나중에 Redis
 Swagger 실행 (run 이후)
 http://localhost:8080/swagger-ui/index.html
 
+Redis Kafka 실행
+docker-compose up -d
+
+Clear Docker Container
+docker compose down 
 # 5) APIs
 
 ## 5.1 Posts (Mongo)
@@ -41,7 +46,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ## 5.3 Feed (조합)
 
-- GET  /feed?userId=&page=0&size=10
+- GET  /fee[README.md](README.md)d?userId=&page=0&size=10
 
 
 # 6) Functional Requirements

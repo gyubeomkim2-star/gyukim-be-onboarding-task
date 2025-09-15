@@ -7,8 +7,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +19,15 @@ import java.util.Optional;
 public class PostService {
     private final PostRepository postRepository;
     private final MongoTemplate mongoTemplate;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
     public Post createPost(Post post) {
-        return postRepository.save(post);
+        post.setCreatedAt(Instant.now().toEpochMilli());
+
+        Post createdPost = postRepository.save(post);
+        kafkaTemplate.send("post-created", createdPost.getId(), createdPost);
+
+        return createdPost;
     }
 
     public Optional<Post> getPostById(String id) {
