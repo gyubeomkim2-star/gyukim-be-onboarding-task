@@ -1,6 +1,8 @@
 package com.example.gyukimbeonboardingtask.exception;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.example.gyukimbeonboardingtask.dto.APIResponse;
 import org.junit.jupiter.api.Test;

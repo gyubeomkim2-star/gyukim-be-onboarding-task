@@ -44,15 +44,14 @@ docker compose down
 
 - GET /users/{userId}/followers
 
-## 5.3 Feed (조합)
-
-- GET  /fee[README.md](README.md)d?userId=&page=0&size=10
-
+## 5.3 Feed (조합)[Post.java](src/main/java/com/example/gyukimbeonboardingtask/domain/mongodb/Post.java)
+[Post.java](src/main/java/com/example/gyukimbeonboardingtask/domain/mongodb/Post.java)
+- GET  /feed?userId=&page=0&size=10
 
 # 6) Functional Requirements
 - User (MySQL/JPA)
 - Follow/Unfollow(MySQL/JPA)
-- Post CURD
+- Post CURD[Post.java](src/main/java/com/example/gyukimbeonboardingtask/domain/mongodb/Post.java)
 - Feeds (able to retrieve the latest posts from users who I follow)
 - Tag or Title based search
 - Cursor or pagination
