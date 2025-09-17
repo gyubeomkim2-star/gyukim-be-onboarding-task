@@ -1,9 +1,11 @@
 package com.example.gyukimbeonboardingtask.domain.mongodb;
 
 import lombok.Data;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -16,6 +18,8 @@ public class Post {
     private String content;
     private String imageUrl;
     private List<String> tags;
+
+    private Long createdAt;
 
     private List<String> likes;
 }

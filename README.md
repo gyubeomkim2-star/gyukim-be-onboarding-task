@@ -22,6 +22,11 @@ MySQL, Mongo (옵션) 나중에 Redis
 Swagger 실행 (run 이후)
 http://localhost:8080/swagger-ui/index.html
 
+Redis Kafka 실행
+docker-compose up -d
+
+Clear Docker Container
+docker compose down 
 # 5) APIs
 
 ## 5.1 Posts (Mongo)
@@ -39,15 +44,14 @@ http://localhost:8080/swagger-ui/index.html
 
 - GET /users/{userId}/followers
 
-## 5.3 Feed (조합)
-
+## 5.3 Feed (조합)[Post.java](src/main/java/com/example/gyukimbeonboardingtask/domain/mongodb/Post.java)
+[Post.java](src/main/java/com/example/gyukimbeonboardingtask/domain/mongodb/Post.java)
 - GET  /feed?userId=&page=0&size=10
-
 
 # 6) Functional Requirements
 - User (MySQL/JPA)
 - Follow/Unfollow(MySQL/JPA)
-- Post CURD
+- Post CURD[Post.java](src/main/java/com/example/gyukimbeonboardingtask/domain/mongodb/Post.java)
 - Feeds (able to retrieve the latest posts from users who I follow)
 - Tag or Title based search
 - Cursor or pagination
