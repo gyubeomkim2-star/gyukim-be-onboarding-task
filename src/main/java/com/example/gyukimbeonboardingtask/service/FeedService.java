@@ -93,6 +93,8 @@ public class FeedService {
 
         logger.info("Post IDs from Redis: {}", retrievedPostIds);
 
+        //List<Post> postsFromRedis = mongoTemplate.find(Query.query(Criteria.where("id").in(retrievedPostIds)), Post.class);
+
         // 2. Process Redis results if a cache exists
         if (!retrievedPostIds.isEmpty()) {
             logger.info("Found data in Redis cache. Returning Redis data.");
@@ -142,6 +144,8 @@ public class FeedService {
                 .map(Feed::getPostId)
                 .collect(Collectors.toList());
 
+        //List<Post> mongoPosts = mongoTemplate.find(Query.query(Criteria.where("id").in(mongoPostIds)), Post.class);
+
         boolean hasMoreFromMongo = mongoPostIds.size() > limit;
         if (hasMoreFromMongo) {
             mongoPostIds.remove(mongoPostIds.size() - 1);
@@ -154,4 +158,5 @@ public class FeedService {
         }
 
         return new FeedResponse(mongoPostIds, nextCursorFromMongo, hasMoreFromMongo);
-    }}
+    }
+}

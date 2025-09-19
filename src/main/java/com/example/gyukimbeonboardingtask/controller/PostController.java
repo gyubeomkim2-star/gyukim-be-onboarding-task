@@ -32,14 +32,14 @@ public class PostController {
         return ResponseEntity.ok(createdPost);
     }
 
-    /**@GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Post> getPostById(@PathVariable String id) {
         return postService.getPostById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
-    }**/
+    }
 
-    @GetMapping("/{authorId}")
+    @GetMapping("/auth/{authorId}")
     public ResponseEntity<List<Post>> getPostsByAuthorId(@PathVariable String authorId) {
         List<Post> posts = postService.getPostsByAuthorId(authorId);
         if (posts.isEmpty()) {
