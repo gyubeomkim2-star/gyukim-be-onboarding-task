@@ -52,7 +52,7 @@ docker compose down
 - User (MySQL/JPA)
 - Follow/Unfollow(MySQL/JPA)
 - Post CURD
-- Feeds (able to retrieve the latest posts from users who I follow)
+- Feeds (able to retrieve the latest posts from users who I follow) - Fan out
 - Tag or Title based search
 - Cursor based pagination
 
