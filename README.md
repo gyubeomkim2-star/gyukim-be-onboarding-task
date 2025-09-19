@@ -3,7 +3,8 @@
 - Auth/User/Follow: MySQL(JPA)
 - Posts: MongoDB(문서형)
 - Feed: Follow + Post 조합 조회
-- Caching(옵션): 이후 Redis로 단건 조회 캐시(post:{id}) 도입 예정
+- Caching
+- Kafka
 
 # 2) 기술 스택
    - Java 17, Spring Boot 3
@@ -53,7 +54,7 @@ docker compose down
 - Post CURD
 - Feeds (able to retrieve the latest posts from users who I follow)
 - Tag or Title based search
-- Cursor or pagination
+- Cursor based pagination
 
 # 7) Non-Functional Requirements
 
