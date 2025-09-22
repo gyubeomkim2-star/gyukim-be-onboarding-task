@@ -150,6 +150,8 @@
                                 <exclude>com/example/gyukimbeonboardingtask/SwaggerConfig.class</exclude>
                                 <exclude>com/example/gyukimbeonboardingtask/config/*</exclude>
                                 <exclude>com/example/gyukimbeonboardingtask/GyukimBeOnboardingTaskApplication.class</exclude>
+                                <exclude>com/example/gyukimbeonboardingtask/aop/LoggingAspect.class</exclude>
+                                <exclude>com/example/gyukimbeonboardingtask/interceptor/LoggingInterceptor.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
